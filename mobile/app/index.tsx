@@ -1,6 +1,12 @@
+import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar'
 import { Text, View, ImageBackground, TouchableOpacity } from 'react-native'
 import { styled } from 'nativewind';
+import { useAuthRequest, makeRedirectUri } from "expo-auth-session"
+import * as SecureStore from 'expo-secure-store';
+import { useRouter } from "expo-router";
+
+import { api } from '../src/lib/api';
 
 import { 
   useFonts,
@@ -9,20 +15,59 @@ import {
 } from '@expo-google-fonts/roboto';
 import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree';
 
-import blurBg from './src/assets/bg-blur.png'
-import Stripes from './src/assets/stripes.svg'
-import NLWLogo from './src/assets/nlw-spacetime-logo.svg'
+import blurBg from '../src/assets/bg-blur.png'
+import Stripes from '../src/assets/stripes.svg'
+import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
 
-import { Loading } from './src/components/Loading';
+import { Loading } from '../src/components/Loading';
 
 const StyleStripes = styled(Stripes)
 
+const discovery = {
+  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+  tokenEndpoint: 'https://github.com/login/oauth/access_token',
+  revocationEndpoint: 'https://github.com/settings/connections/applications/bb003d1d70ec86d27453',
+};
+
 export default function App() {
+  const router = useRouter()
+
   const [hasLoadedFonts] = useFonts({
     Roboto_400Regular, 
     Roboto_700Bold, 
     BaiJamjuree_700Bold
   })
+
+  const [ request, response, signInWithGithub] = useAuthRequest(
+    {
+      clientId: 'bb003d1d70ec86d27453',
+      scopes: ['identity'],
+      redirectUri: makeRedirectUri({
+        scheme: 'nlwspacetime'
+      }),
+    },
+    discovery
+  );
+
+  async function handleGithubOAuthCode(code: string) {
+    const response = await api.post('/register', {
+      code,
+    })
+
+    const { token } = response.data
+
+    await SecureStore.setItemAsync('token', token)
+
+    router.push('/memories')
+  }
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { code } = response.params;
+
+      handleGithubOAuthCode(code)
+    }
+  }, [response]);
 
   return (
     <ImageBackground 
@@ -47,7 +92,11 @@ export default function App() {
               </Text>
             </View>
 
-            <TouchableOpacity activeOpacity={0.7} className="rounded-full bg-green-500 px-5 py-2">
+            <TouchableOpacity 
+              activeOpacity={0.7} 
+              className="rounded-full bg-green-500 px-5 py-2"
+              onPress={() => signInWithGithub()}
+            >
               <Text className="font-alt text-sm uppercase text-black">
                 Cadastrar lembrança
               </Text>
@@ -63,3 +112,4 @@ export default function App() {
     </ImageBackground>
   )
 }
+
