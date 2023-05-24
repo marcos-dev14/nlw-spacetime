@@ -28,7 +28,7 @@ export default async function Memory({ params }: ParamsProps) {
   const memory: MemoryProps = response.data
 
   return (
-    <div className="flex h-full flex-col gap-10 p-8">
+    <div className="flex flex-1 flex-col gap-10 p-8">
       <Link
         href="/"
         className="flex items-center gap-1 text-sm text-gray-200 transition-colors hover:text-gray-100"

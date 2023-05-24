@@ -97,14 +97,6 @@ export function EditMemory({ memory }: EditMemoryProps) {
           className="flex flex-1 flex-col gap-2"
         >
           <div className="flex items-center gap-4">
-            {/* <label
-              htmlFor="media"
-              className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-200 transition-colors hover:text-gray-100"
-            >
-              <ImagePlus className="h-4 w-4" />
-              Anexar mídia
-            </label> */}
-
             <label
               htmlFor="isPublic"
               className="flex items-center gap-1.5 text-sm text-gray-200 transition-colors hover:text-gray-100"
@@ -124,7 +116,7 @@ export function EditMemory({ memory }: EditMemoryProps) {
             name="content"
             spellCheck={false}
             className="w-full flex-1 resize-none rounded border-0 bg-transparent px-1 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
-            placeholder="Fique livre para editar a sua experiência desse dia."
+            placeholder="Descreva sobre esse dia."
           />
 
           <button
