@@ -129,12 +129,12 @@ export function EditMemory({ memory }: EditMemoryProps) {
       )}
 
       <div className="space-y-4">
+        {/* eslint-disable-next-line */}
         <img
           src={memory.coverUrl}
           alt=""
           className="aspect-video w-full rounded-lg object-cover"
         />
-
         <p className="text-lg leading-relaxed text-gray-100">
           {memory.content}
         </p>

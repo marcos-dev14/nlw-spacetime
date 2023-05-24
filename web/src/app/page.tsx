@@ -44,6 +44,7 @@ export default async function Home() {
               {dayjs(memory.createdAt).format('D[ de ]MMMM[ , ]YYYY')}
             </time>
 
+            {/* eslint-disable-next-line */}
             <img
               src={memory.coverUrl}
               alt=""
