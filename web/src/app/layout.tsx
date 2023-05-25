@@ -33,9 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`${roboto.variable} ${baiJamjuree.variable} bg-gray-900 font-roboto text-gray-100`}
       >
-        <main className="grid min-h-screen grid-cols-2 max-lg:flex">
+        <main className="grid min-h-screen grid-cols-2 max-lg:flex max-lg:max-h-screen max-lg:flex-col">
           {/* Left */}
-          <div className="relative flex w-full flex-col items-start justify-between overflow-hidden border-r border-white/10 bg-[url(../assets/bg-stars.svg)] bg-cover px-28 py-16 max-lg:px-2">
+          <div className="relative flex w-full flex-col items-start justify-between overflow-hidden border-r border-white/10 bg-[url(../assets/bg-stars.svg)] bg-cover px-28 py-16 max-lg:px-2 max-lg:pb-20">
             {/* Blur */}
             <div className="absolute right-0 top-1/2 h-[288px] w-[526px] -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-700 opacity-50 blur-full" />
 
@@ -48,16 +48,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {/* Hero */}
             <Hero />
 
-            <div className="flex flex-col overflow-y-scroll bg-[url(../assets/bg-stars.svg)] bg-cover max-lg:h-full max-lg:w-full lg:hidden">
+            {/* <div className="flex flex-col overflow-y-scroll bg-[url(../assets/bg-stars.svg)] bg-cover max-lg:h-full max-lg:w-full lg:hidden">
               {children}
-            </div>
+            </div> */}
 
             {/* Copyright */}
             <Copyright />
           </div>
 
           {/* Right */}
-          <div className="flex max-h-screen flex-col overflow-y-scroll bg-[url(../assets/bg-stars.svg)] bg-cover max-lg:hidden">
+          <div className="flex max-h-screen flex-col overflow-y-scroll bg-[url(../assets/bg-stars.svg)] bg-cover">
+            <div className="absolute bottom-0 right-2 top-0 w-2 bg-stripes max-lg:left-2 lg:hidden" />
             {children}
           </div>
         </main>
