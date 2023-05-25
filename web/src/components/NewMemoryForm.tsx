@@ -49,7 +49,10 @@ export function NewMemoryForm() {
   }
 
   return (
-    <form onSubmit={handleCreateMemory} className="flex flex-1 flex-col gap-2 ">
+    <form
+      onSubmit={handleCreateMemory}
+      className="flex flex-1 flex-col gap-2 max-lg:h-full max-lg:w-full "
+    >
       <div className="flex items-center gap-4">
         <label
           htmlFor="media"
