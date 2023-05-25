@@ -1,5 +1,4 @@
 import { User } from 'lucide-react'
-import Link from 'next/link'
 
 export function SignIn() {
   return (
@@ -14,13 +13,6 @@ export function SignIn() {
       <p className="max-w-[140px] text-sm leading-snug">
         <span className="undeline">Crie sua conta</span> e salve suas memórias!
       </p>
-
-      <Link
-        href="/memories/new"
-        className="inline-block rounded-full bg-green-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black transition-colors hover:bg-green-600 max-lg:ml-3 lg:hidden"
-      >
-        CADASTRAR LEMBRANÇA
-      </Link>
     </a>
   )
 }
