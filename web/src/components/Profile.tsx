@@ -6,7 +6,10 @@ export function Profile() {
   const { name, avatarUrl } = getUser()
 
   return (
-    <div className="flex items-center gap-3 text-left max-lg:ml-5">
+    <div
+      data-testid="profile_test"
+      className="flex items-center gap-3 text-left max-lg:ml-5"
+    >
       <div className="flex items-center gap-3 text-left max-lg:flex-col max-lg:items-start">
         <Image
           src={avatarUrl}
