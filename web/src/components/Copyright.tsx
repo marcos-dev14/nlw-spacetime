@@ -1,6 +1,9 @@
 export function Copyright() {
   return (
-    <div className="text-sm leading-relaxed text-gray-200 max-lg:hidden">
+    <div
+      data-testid="link_test"
+      className="text-sm leading-relaxed text-gray-200 max-lg:hidden"
+    >
       Feito com 💜 no NLW da{' '}
       <a
         target="_blank"
