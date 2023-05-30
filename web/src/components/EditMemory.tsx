@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 
 import dayjs from 'dayjs'
 import ptBr from 'dayjs/locale/pt-br'
-// import { MediaPicker } from './MediaPicker'
 
 dayjs.locale(ptBr)
 
@@ -113,6 +112,7 @@ export function EditMemory({ memory }: EditMemoryProps) {
           </div>
 
           <textarea
+            data-testid="textarea_test"
             name="content"
             spellCheck={false}
             className="w-full flex-1 resize-none rounded border-0 bg-transparent px-1 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
