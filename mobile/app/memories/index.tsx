@@ -14,9 +14,9 @@ import { Link, useRouter } from "expo-router";
 import dayjs from "dayjs";
 import ptBr from 'dayjs/locale/pt-br'
 
-import { api } from "../src/lib/api";
+import { api } from "../../src/lib/api";
 
-import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
+import NLWLogo from '../../src/assets/nlw-spacetime-logo.svg'
 
 dayjs.locale(ptBr)
 
@@ -27,7 +27,7 @@ interface MemoryProps {
   id: string
 }
 
-export default function Memory() {  
+export default function Memories() {  
   const [memories, setMemories] = useState<MemoryProps[]>([])
 
   const { bottom, top } = useSafeAreaInsets();
@@ -54,7 +54,7 @@ export default function Memory() {
 
   useEffect(() => {
     loadMemories()
-  },[])
+  },[memories])
 
   return (
     <ScrollView 
@@ -69,7 +69,7 @@ export default function Memory() {
           asChild
         >
           <View className="flex-row gap-2">
-          <TouchableOpacity 
+            <TouchableOpacity 
               onPress={SignOut}
               activeOpacity={0.7}
               className="h-10 w-10 items-center justify-center rounded-full bg-red-500"
@@ -110,7 +110,7 @@ export default function Memory() {
                   {memory.excerpt}
                 </Text>
 
-                <Link href="/memories/id" asChild>
+                <Link href={`/memories/${memory.id}`} asChild>
                   <TouchableOpacity className="flex-row items-center gap-2">
                     <Text className="font-body text-sm text-gray-200">Ler Mais</Text>
                     <Icon name="arrow-right" size={16} color="#9e9ea0" />
