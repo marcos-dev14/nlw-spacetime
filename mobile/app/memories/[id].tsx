@@ -11,14 +11,14 @@ import {
 } from "react-native";
 import { useSearchParams, Link, useRouter } from "expo-router";
 import * as SecureStore from 'expo-secure-store'
-import { api } from "../../src/lib/api";
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import dayjs from "dayjs";
 import ptBr from 'dayjs/locale/pt-br'
 import Icon from "@expo/vector-icons/Feather"
 
-
 dayjs.locale(ptBr)
+
+import { api } from "../../src/lib/api";
 
 interface MemoryProps {
   coverUrl: string;
@@ -164,7 +164,7 @@ export default function Memory() {
               placeholder="Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre."
             />
 
-            <View className="flex-row items-center gap-2">
+            <View className="flex-row items-center gap-4">
               <Switch 
                 value={isPublic} 
                 onValueChange={setIsPublic}
