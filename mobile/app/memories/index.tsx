@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useFocusEffect } from "expo-router"
 
 import { 
   View, 
@@ -6,6 +7,7 @@ import {
   ScrollView,
   Text,
   Image,
+  Alert,
 } from "react-native";
 import Icon from "@expo/vector-icons/Feather"
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -41,20 +43,25 @@ export default function Memories() {
   }
 
   async function loadMemories() {
-    const token = await SecureStore.getItemAsync('token')
+    try {
+      const token = await SecureStore.getItemAsync('token')
 
-    const response = await api.get("/memories", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+      const response = await api.get("/memories", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
 
-    setMemories(response.data)
+      setMemories(response.data)
+    } catch (error) {
+      Alert.alert("Memorias", "Não foi possível carregar as memorias.")
+      console.log(error);
+    }
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     loadMemories()
-  },[])
+  },[]))
 
   return (
     <ScrollView 

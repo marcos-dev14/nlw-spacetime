@@ -40,31 +40,41 @@ export default function Memory() {
   const { bottom, top } = useSafeAreaInsets();
 
   async function handleEditMemory() {
-    const token = await SecureStore.getItemAsync('token');
+    try {
+      const token = await SecureStore.getItemAsync('token');
 
-    await api.put(`/memories/${id}`, {
-      coverUrl: isMemory.coverUrl,
-      content,
-      isPublic,
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-
-    route.push('/memories')
+      await api.put(`/memories/${id}`, {
+        coverUrl: isMemory.coverUrl,
+        content,
+        isPublic,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+  
+      route.push('/memories')
+    } catch (error) {
+      Alert.alert("Memoria", "Não foi possível editar a memoria.")
+      console.log(error);
+    }
   }
 
   async function deleteMemory() {
-    const token = await SecureStore.getItemAsync('token');
+    try {
+      const token = await SecureStore.getItemAsync('token');
 
-    await api.delete(`/memories/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+      await api.delete(`/memories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
-    route.push('/memories')
+      route.push('/memories')
+    } catch (error) {
+      Alert.alert("Memoria", "Não foi possível deletar a memoria.")
+      console.log(error);
+    }
   }
 
   async function handleDeleteMemory() {
@@ -81,15 +91,20 @@ export default function Memory() {
   }
 
   async function loadMemory() {
-    const token = await SecureStore.getItemAsync('token');
+    try {
+      const token = await SecureStore.getItemAsync('token');
 
-    const response = await api.get(`/memories/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+      const response = await api.get(`/memories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
 
-    setIsMemory(response.data)
+      setIsMemory(response.data)
+    } catch (error) {
+      Alert.alert("Memoria", "Não foi possível carregar a memoria.")
+      console.log(error);
+    }
   }
 
   useEffect(() => {
