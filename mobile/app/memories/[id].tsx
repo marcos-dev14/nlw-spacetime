@@ -21,10 +21,11 @@ dayjs.locale(ptBr)
 import { api } from "../../src/lib/api";
 
 interface MemoryProps {
-  coverUrl: string;
-  content: string;
-  createdAt: string;
+  coverUrl: string
+  content: string
+  createdAt: string
   id: string
+  isPublic: boolean
 }
 
 export default function Memory() {
@@ -181,7 +182,7 @@ export default function Memory() {
 
             <View className="flex-row items-center gap-4">
               <Switch 
-                value={isPublic} 
+                value={isPublic || isMemory.isPublic} 
                 onValueChange={setIsPublic}
                 trackColor={{ false: '#767577', true: '#372560' }}
                 thumbColor={isPublic ? '#9b79ea' : '#9e9ea0'}
